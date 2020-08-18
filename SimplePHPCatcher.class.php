@@ -28,6 +28,14 @@ class SimplePHPCatcher
             $data .= $key . " : " . $post . "\n";
         }
 
+        // JSON data
+        $jsonData = json_decode(file_get_contents('php://input'));
+        if ($jsonData) {
+            foreach ($jsonData as $key => $value) {
+                $data .= $key . " : " . $value . "\n";
+            }
+        }
+
         // GET data
         foreach ($_GET as $key => $get) {
             $data .= $key . " : " . $get . "\n";
