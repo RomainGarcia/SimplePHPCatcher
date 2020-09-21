@@ -31,9 +31,7 @@ class SimplePHPCatcher
         // JSON data
         $jsonData = json_decode(file_get_contents('php://input'));
         if ($jsonData) {
-            foreach ($jsonData as $key => $value) {
-                $data .= $key . " : " . $value . "\n";
-            }
+            $data .= var_export($jsonData, true) . "\n";
         }
 
         // GET data
