@@ -10,13 +10,20 @@ Simple PHP catcher, to store the elements of an HTTP request in a text file.
 
 ```php
 require_once("SimplePHPCatcher.class.php");
+$catcher = new SimpleCatcher("catch.txt");
+$catcher->catch(true); // catch data and headers (true parameter) 
+```
+
+### Catch everything on each request with redirection management
+
+```php
+require_once("SimplePHPCatcher.class.php");
 $catcher = new SimpleCatcher("catch.txt", "https://www.example.com/");
 $catcher->redirectOnCookie(); // Redirect if the 'rememberme' cookie is set
 
 $catcher->catch(true); // catch data and headers (true parameter) 
 $catcher->setRememberCookie(); // set the rememberme cookie to redirect the user on new visit (optional)
 $catcher->redirect(); // Redirect the user on the URL set in the constructor (optional)
-
 ```
 
 ### Catch only POST data
