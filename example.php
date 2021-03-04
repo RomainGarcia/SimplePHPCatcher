@@ -4,11 +4,10 @@
     //$catcher->redirectOnCookie();
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
-        $catcher->catch();
+        $catcher->catch(true);
         $catcher->setRememberCookie();
         $catcher->redirect();
     }
-
 ?>
 
 <!DOCTYPE html>

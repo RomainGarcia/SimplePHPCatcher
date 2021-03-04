@@ -11,21 +11,40 @@ class SimplePHPCatcher
     protected $DataToCatch;
     protected $RememberCookieName;
 
-    function __construct($outputFile, $redirectURL = null, $dataToCatch = ['REMOTE_ADDR', 'HTTP_USER_AGENT', 'HTTP_REFERER'], $rememberCookieName = "rememberme")
+    function __construct($outputFile, $redirectURL = null, $serverDataToCatch = ['REMOTE_ADDR'], $rememberCookieName = "rememberme")
     {
         $this->OutputFile = $outputFile;
         $this->RedirectURL = $redirectURL;
-        $this->DataToCatch = $dataToCatch;
+        $this->ServerDataToCatch = $serverDataToCatch;
         $this->RememberCookieName = $rememberCookieName;
     }
 
-    function catch()
+    function catch($headers = false)
     {
         $data = "";
 
+        // Date and time
+        $date = new DateTime(null, new DateTimeZone('Europe/Paris'));
+        $data .= $date->format('Y-m-d H:i:s O') . "\n\n";
+
+        // SERVER data
+        foreach ($this->DataToCatch as $key => $serverData) {
+            $data .= isset($_SERVER[$serverData]) ? $serverData . " : " . $_SERVER[$serverData] . "\n" : "";
+        }
+
+        // Headers
+        if ($headers) {
+            foreach (getallheaders() as $key => $header) {
+                $data .= $key . ": " . $header . "\n";
+            }
+        }
+
+        // Line break between headers and data
+        $data .= "\n";
+
         // POST data
         foreach ($_POST as $key => $post) {
-            $data .= $key . " : " . $post . "\n";
+            $data .= $key . ": " . $post . "\n";
         }
 
         // JSON data
@@ -36,12 +55,7 @@ class SimplePHPCatcher
 
         // GET data
         foreach ($_GET as $key => $get) {
-            $data .= $key . " : " . $get . "\n";
-        }
-
-        // SERVER data
-        foreach ($this->DataToCatch as $key => $serverData) {
-            $data .= isset($_SERVER[$serverData]) ? $serverData . " : " . $_SERVER[$serverData] . "\n" : "";
+            $data .= $key . ": " . $get . "\n";
         }
 
         // Separator

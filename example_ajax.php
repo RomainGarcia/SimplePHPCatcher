@@ -5,8 +5,8 @@
     // Set CORS headers
     $catcher->cors();
 
-    if ($_SERVER['REQUEST_METHOD'] === "POST") {
-        $catcher->catch();
+    if ($_SERVER['REQUEST_METHOD'] !== "GET") {
+        $catcher->catch(true);
     }
 
 ?>
