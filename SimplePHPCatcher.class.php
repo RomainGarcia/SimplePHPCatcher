@@ -28,7 +28,7 @@ class SimplePHPCatcher
         $data .= $date->format('Y-m-d H:i:s O') . "\n\n";
 
         // URL
-        $data .= "URL: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . '\n';
+        $data .= "URL: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . "\n";
         
         // SERVER data
         foreach ($this->DataToCatch as $key => $serverData) {
