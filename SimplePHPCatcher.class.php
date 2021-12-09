@@ -27,6 +27,9 @@ class SimplePHPCatcher
         $date = new DateTime(null, new DateTimeZone('Europe/Paris'));
         $data .= $date->format('Y-m-d H:i:s O') . "\n\n";
 
+        // Source IP address
+        $data .= "Source IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
+        
         // URL
         $data .= "URL: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . "\n";
         
