@@ -2,7 +2,7 @@
 
 ## Description
 
-Simple PHP catcher, to store the elements of an HTTP request in a text file.
+Simple PHP catcher, to store the elements of an HTTP request in a text file. Usefull for security audit to get information sent back from, for example, a blind XSS injection.
 
 ## Usage
 
@@ -75,6 +75,8 @@ Output examples:
 ```
 2021-03-04 15:13:47 +0100
 
+Source IP: 192.168.5.200
+URL: http://192.168.1.124/test
 Host: 192.168.1.124
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36
@@ -94,6 +96,8 @@ Content-Length: 31
 ```
 2021-03-04 15:15:40 +0100
 
+Source IP: 192.168.5.200
+URL: http://192.168.1.124/test
 Host: 192.168.1.124
 Content-Length: 31
 Cache-Control: max-age=0
